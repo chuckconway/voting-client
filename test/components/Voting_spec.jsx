@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import ReactDOM from 'react-dom';
-import Voting from '../../src/components/Voting';
+import {Voting} from '../../src/components/Voting';
 import {expect} from 'chai';
 
 const {renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate} = React.addons.TestUtils;

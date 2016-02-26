@@ -1,33 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Voting from './components/Voting';
+import {VotingContainer} from './components/Voting';
 
 import {Provider} from 'react-redux';
 
 import {createStore} from 'redux';
 import reducer from './reducer';
 
+import {setState} from './action_creators';
+
 import {Router, Route} from 'react-router';
 import App from './components/App';
-import Results from './components/Results';
+import {ResultsContainer} from './components/Results';
 
-const pair = ['Trainspotting', '28 Days Later'];
+import io from 'socket.io-client';
 
 const store = createStore(reducer);
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
-store.dispatch({
-	type:'SET_STATE',
-	state:{
-		vote:{
-			pair:['Sunshine', '28 Days Later'],
-			tally: {Sunshine:2}
-		}
-	}
-});
+socket.on('state', state => store.dispatch(setState(state)));
 
 const routes = <Route component={App}>
-								<Route path="/results" components={Results} />
-									<Route path="/" component={Voting} />
+								<Route path="/results" components={ResultsContainer} />
+									<Route path="/" component={VotingContainer} />
 							</Route>
 
 ReactDOM.render(

@@ -1,7 +1,7 @@
 import React from 'react/addons';
 import ReactDOM from 'react-dom';
 import {List, Map} from 'immutable';
-import Results from '../../src/components/Results';
+import {Results} from '../../src/components/Results';
 import {expect} from 'chai';
 
 const {renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate} = React.addons.TestUtils;
@@ -47,7 +47,7 @@ describe('Results', () => {
                    tally={Map()} />
         );
 
-        const winner = React.findDOMNode(component.refs.winner);
+        const winner = ReactDOM.findDOMNode(component.refs.winner);
 
         expect(winner).to.be.ok;
         expect(winner.textContent).to.contain('Trainspotting');
