@@ -2,6 +2,8 @@ import React from 'react';
 import Winner from './Winner';
 import {connect} from 'react-redux';
 
+import * actionCreators from '../action_creators';
+
 export const Results = class Results extends React.Component {
   constructor(props){
     super(props);

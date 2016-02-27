@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7d02fc99003dd2e02ba6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8233283b45d11939cd33"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8081,9 +8081,15 @@
 
 	var _socket2 = _interopRequireDefault(_socket);
 
+	var _remote_action_middleware = __webpack_require__(381);
+
+	var _remote_action_middleware2 = _interopRequireDefault(_remote_action_middleware);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var store = (0, _redux.createStore)(_reducer2.default);
+	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_remote_action_middleware2.default)(_redux.createStore);
+
+	var store = createStoreWithMiddleware(_reducer2.default);
 	var socket = (0, _socket2.default)(location.protocol + '//' + location.hostname + ':8090');
 
 	socket.on('state', function (state) {
@@ -47667,6 +47673,31 @@
 	};
 
 
+
+/***/ },
+/* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function (store) {
+	  return function (next) {
+	    return function (action) {
+	      console.log('in middleware', action);
+
+	      return next(action);
+	    };
+	  };
+	};
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(246); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "remote_action_middleware.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }
 /******/ ]);

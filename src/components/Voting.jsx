@@ -26,7 +26,7 @@ export const Voting = class Voting extends React.Component{
 function mapStateToProps(state){
 	return {
 		pair:state.getIn(['vote', 'pair']),
-		hasVoted:state(get('hasVoted')),
+		hasVoted:state.get('hasVoted'),
 		winner: state.get('winner')
 	};
 }

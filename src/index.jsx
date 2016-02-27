@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import {VotingContainer} from './components/Voting';
 
 import {Provider} from 'react-redux';
-
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducer';
 
 import {setState} from './action_creators';
@@ -15,7 +14,11 @@ import {ResultsContainer} from './components/Results';
 
 import io from 'socket.io-client';
 
-const store = createStore(reducer);
+import remoteActionMiddleware from './remote_action_middleware';
+
+const createStoreWithMiddleware = applyMiddleware(remoteActionMiddleware(socket))(createStore);
+
+const store = createStoreWithMiddleware(reducer);
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 
 socket.on('state', state => store.dispatch(setState(state)));
